@@ -41,10 +41,13 @@ class ArrayFileWriter
 
     private function set_deep_index_value($data_indexes, $new_value)
     {
-        foreach ($data_indexes as $index){
-            if($index == sizeof($data_indexes)-1)  $this->data[$index]=$new_value;
-            else return $this->set_deep_index_value(array_slice($data_indexes,1),$new_value);
+        $current =& $this->data;
+
+        foreach ($data_indexes as $index) {
+            $current =& $current[$index];
         }
+    
+        $current = $new_value;
     }
 
     private function update_config($target, $new_value = null)
